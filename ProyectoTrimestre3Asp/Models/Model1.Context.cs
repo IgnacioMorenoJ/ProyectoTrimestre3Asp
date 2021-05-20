@@ -13,10 +13,10 @@ namespace ProyectoTrimestre3Asp.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class baseproyectot3Entities : DbContext
+    public partial class inventario2021Entities : DbContext
     {
-        public baseproyectot3Entities()
-            : base("name=baseproyectot3Entities")
+        public inventario2021Entities()
+            : base("name=inventario2021Entities")
         {
         }
     
@@ -25,5 +25,14 @@ namespace ProyectoTrimestre3Asp.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<cliente> clientes { get; set; }
+        public virtual DbSet<compra> compras { get; set; }
+        public virtual DbSet<producto> productoes { get; set; }
+        public virtual DbSet<producto_compra> producto_compra { get; set; }
+        public virtual DbSet<producto_imagen> producto_imagen { get; set; }
+        public virtual DbSet<proveedor> proveedors { get; set; }
+        public virtual DbSet<role> roles { get; set; }
+        public virtual DbSet<usuario> usuarios { get; set; }
+        public virtual DbSet<usuariorol> usuariorols { get; set; }
     }
 }
