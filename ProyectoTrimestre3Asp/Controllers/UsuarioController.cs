@@ -12,15 +12,15 @@ namespace ProyectoTrimestre3Asp.Controllers
     {
         // GET: Usuario
         public ActionResult Index()
-                       
+
         {
             using (var db = new inventario2021Entities())
 
             {
-               return View(db.usuarios.ToList());
+                return View(db.usuarios.ToList());
 
             }
-                     
+
         }
 
         public ActionResult Create()
@@ -32,15 +32,15 @@ namespace ProyectoTrimestre3Asp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Create(usuario usuario) 
-           
+        public ActionResult Create(usuario usuario)
+
         {
 
             if (!ModelState.IsValid)
                 return View();
 
-            try { 
-                using (var db = new inventario2021Entities ())
+            try {
+                using (var db = new inventario2021Entities())
 
                 {
                     usuario.password = UsuarioController.HashSHA1(usuario.password);
@@ -48,7 +48,7 @@ namespace ProyectoTrimestre3Asp.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                       
+
             } catch (Exception ex)
             {
                 ModelState.AddModelError("", "error" + ex);
@@ -59,8 +59,8 @@ namespace ProyectoTrimestre3Asp.Controllers
         }
 
 
-        public static string HashSHA1(string value) 
-        
+        public static string HashSHA1(string value)
+
         {
 
             var sha1 = System.Security.Cryptography.SHA1.Create();
@@ -68,14 +68,85 @@ namespace ProyectoTrimestre3Asp.Controllers
             var hash = sha1.ComputeHash(inputBytes);
 
             var sb = new StringBuilder();
-            for (var i = 0; i <hash.Length; i++)
+            for (var i = 0; i < hash.Length; i++)
             {
                 sb.Append(hash[i].ToString("X2"));
             }
             return sb.ToString();
-                   
+
+        }
+
+
+        public ActionResult Edit(int id)
+        {
+            try
+            {
+                using (var db = new inventario2021Entities())
+                {
+                    usuario finduser = db.usuarios.Where(a => a.id == id).FirstOrDefault();
+                    return View(finduser);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "error" + ex);
+                return View();
+            }
+
+        }
+
+        public ActionResult Details(int id)
+        {
+            //abriendo conexion a la BD
+            using (var db = new inventario2021Entities())
+            {
+                //buscar usuario por id
+                usuario user = db.usuarios.Find(id);
+                return View(user);
+            }
+        }
+
+        public ActionResult Delete(int id)
+        {
+            using (var db = new inventario2021Entities())
+            {
+                var usuario = db.usuarios.Find(id);
+                db.usuarios.Remove(usuario);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(usuario usuarioEdit)
+        {
+            try
+            {
+                using (var db = new inventario2021Entities())
+                {
+                    usuario user = db.usuarios.Find(usuarioEdit.id);
+
+                    user.nombre = usuarioEdit.nombre;
+                    user.apellido = usuarioEdit.apellido;
+                    user.email = usuarioEdit.email;
+                    user.fecha_nacimiento = usuarioEdit.fecha_nacimiento;
+                    user.password = usuarioEdit.password;
+
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "error " + ex);
+                return View();
+            }
+
+
         }
 
     }
-
 }
