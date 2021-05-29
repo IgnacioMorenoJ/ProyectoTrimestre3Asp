@@ -76,7 +76,6 @@ namespace ProyectoTrimestre3Asp.Controllers
 
         }
 
-
         public ActionResult Edit(int id)
         {
             try
