@@ -1,10 +1,10 @@
-﻿@model IEnumerable<ProyectoTrimestre3Asp.Models.cliente>
+﻿@model IEnumerable<ProyectoTrimestre3Asp.Models.proveedor>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Todos Los Clientes</h2>
+<h2>Todos Los Proveedores</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,13 +12,16 @@
 <table class="table">
     <tr>
         <th>
-           Nombre Cliente
+            Nombre Proveedor
         </th>
         <th>
-            Documento Cliente
+            Direccion Proveedor
         </th>
         <th>
-            Email Cliente
+            Telefono Proveedor
+        </th>
+        <th>
+            Nombre de Contacto Proveedor
         </th>
         <th></th>
     </tr>
@@ -29,10 +32,13 @@
             @Html.DisplayFor(modelItem => item.nombre)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.documento)
+            @Html.DisplayFor(modelItem => item.direccion)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.email)
+            @Html.DisplayFor(modelItem => item.telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre_contacto)
         </td>
         <td>
             @Html.ActionLink("Editar", "Edit", new { id=item.id }) |

@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ProyectoTrimestre3Asp.Models; 
+using ProyectoTrimestre3Asp.Models;
 
 namespace ProyectoTrimestre3Asp.Controllers
 {
-    public class ClienteController : Controller
+    public class ProveedorController : Controller
     {
-        // GET: Cliente
+        // GET: Proveedor
+        
         public ActionResult Index()
-                        
+
         {
-            using (var db = new inventario2021Entities()) 
+            using (var db = new inventario2021Entities())
             {
-                return View(db.clientes.ToList());
+                return View(db.proveedors.ToList());
             }
-                              
+
         }
 
         public ActionResult Create()
@@ -29,7 +30,7 @@ namespace ProyectoTrimestre3Asp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Create(cliente cliente)
+        public ActionResult Create(proveedor proveedor)
 
         {
 
@@ -41,7 +42,7 @@ namespace ProyectoTrimestre3Asp.Controllers
                 using (var db = new inventario2021Entities())
 
                 {
-                    db.clientes.Add(cliente);
+                    db.proveedors.Add(proveedor);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -62,7 +63,7 @@ namespace ProyectoTrimestre3Asp.Controllers
             {
                 using (var db = new inventario2021Entities())
                 {
-                    cliente finduser = db.clientes.Where(a => a.id == id).FirstOrDefault();
+                    proveedor finduser = db.proveedors.Where(a => a.id == id).FirstOrDefault();
                     return View(finduser);
                 }
 
@@ -75,12 +76,12 @@ namespace ProyectoTrimestre3Asp.Controllers
 
         }
 
-         public ActionResult Delete(int id)
+        public ActionResult Delete(int id)
         {
             using (var db = new inventario2021Entities())
             {
-                var cliente = db.clientes.Find(id);
-                db.clientes.Remove(cliente);
+                var proveedor = db.proveedors.Find(id);
+                db.proveedors.Remove(proveedor);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -88,18 +89,20 @@ namespace ProyectoTrimestre3Asp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(cliente clienteEdit)
+        public ActionResult Edit(proveedor proveedorEdit)
         {
             try
             {
                 using (var db = new inventario2021Entities())
                 {
-                    cliente user = db.clientes.Find(clienteEdit.id);
+                    proveedor user = db.proveedors.Find(proveedorEdit.id);
 
-                    user.nombre = clienteEdit.nombre;
-                    user.documento = clienteEdit.documento;
-                    user.email = clienteEdit.email;
-                    
+                    user.nombre = proveedorEdit.nombre;
+                    user.direccion = proveedorEdit.direccion;
+                    user.telefono = proveedorEdit.telefono;
+                    user.nombre_contacto = proveedorEdit.nombre_contacto;
+
+
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -114,14 +117,12 @@ namespace ProyectoTrimestre3Asp.Controllers
 
         public ActionResult Details(int id)
         {
-            
+
             using (var db = new inventario2021Entities())
             {
-                cliente user = db.clientes.Find(id);
+                proveedor user = db.proveedors.Find(id);
                 return View(user);
             }
         }
-
     }
-
-    }
+}
