@@ -40,7 +40,7 @@ namespace ProyectoTrimestre3Asp.Controllers
         {
             using (var db = new inventario2021Entities())
             {
-                return db.clientes.Find(db.clientes).nombre;
+                return db.clientes.Find(idCliente).nombre;
             }
         }
 
@@ -78,6 +78,89 @@ namespace ProyectoTrimestre3Asp.Controllers
                 ModelState.AddModelError("", "error " + ex);
                 return View();
             }
+        }
+
+        public ActionResult Details(int id)
+
+        {
+            using (var db = new inventario2021Entities())
+
+            {
+                compra compraDetalle = db.compras.Where(a => a.id == id).FirstOrDefault();
+                return View(compraDetalle);
+            }
+
+        }
+
+        public ActionResult Delete(int id)
+        {
+
+            using (var db = new inventario2021Entities())
+            {
+                var compraDelete = db.compras.Find(id);
+                db.compras.Remove(compraDelete);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+        }
+
+        public ActionResult Edit(int id)
+
+        {
+
+            try
+            {
+                using (var db = new inventario2021Entities())
+
+                {
+                    compra compra= db.compras.Where(a => a.id == id).FirstOrDefault();
+                    return View(compra);
+                }
+
+            }
+            catch (Exception ex)
+
+            {
+                ModelState.AddModelError("", "error" + ex);
+                return View();
+
+            }
+
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(compra compraEdit)
+
+        {
+            try
+
+            {
+
+                using (var db = new inventario2021Entities())
+
+                {
+                    var compra = db.compras.Find(compraEdit.id);
+                    compra.fecha = compraEdit.fecha;
+                    compra.total = compraEdit.total;
+                    compra.id_usuario = compraEdit.id_usuario;
+                    compra.id_cliente = compraEdit.id_cliente;
+                    
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+
+                }
+
+            }
+            catch (Exception ex)
+
+            {
+                ModelState.AddModelError("", "error" + ex);
+                return View();
+            }
+
         }
 
 
