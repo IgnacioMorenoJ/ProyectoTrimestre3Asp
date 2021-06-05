@@ -1,0 +1,35 @@
+﻿@model ProyectoTrimestre3Asp.Models.producto_imagen
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>producto_imagen</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Imagen Producto
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imagen)
+        </dd>
+
+        <dt>
+            Id Producto
+        </dt>
+
+        <dd>
+            @Html.Action("ListarProducto")
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Regresar a la Lista", "Index")
+</p>
