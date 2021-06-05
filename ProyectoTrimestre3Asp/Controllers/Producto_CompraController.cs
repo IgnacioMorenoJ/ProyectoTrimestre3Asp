@@ -20,7 +20,7 @@ namespace ProyectoTrimestre3Asp.Controllers
         }
 
         }
-        public static string Product(int idProducto)
+        public static string Product (int idProducto)
         {
             using (var db = new inventario2021Entities())
             {
@@ -42,7 +42,7 @@ namespace ProyectoTrimestre3Asp.Controllers
         {
             using (var db = new inventario2021Entities())
             {
-                return db.compras.Find(idCompra).total;
+                return db.compras.Find(idCompra).id_cliente;
             }
         }
 
@@ -54,6 +54,12 @@ namespace ProyectoTrimestre3Asp.Controllers
                 return PartialView(db.compras.ToList());
 
             }
+        }
+
+        public ActionResult Create()
+
+        {
+            return View();
         }
 
         [HttpPost]
@@ -78,7 +84,7 @@ namespace ProyectoTrimestre3Asp.Controllers
                 return View();
             }
         }
-
+                
         public ActionResult Details(int id)
 
         {
@@ -104,6 +110,61 @@ namespace ProyectoTrimestre3Asp.Controllers
 
         }
 
+        public ActionResult Edit(int id)
+
+        {
+
+            try
+            {
+                using (var db = new inventario2021Entities())
+
+                {
+                    producto_compra producto_Compra = db.producto_compra.Where(a => a.id == id).FirstOrDefault();
+                    return View(producto_Compra);
+                }
+
+            }
+            catch (Exception ex)
+
+            {
+                ModelState.AddModelError("", "error" + ex);
+                return View();
+
+            }
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(producto_compra productoCompraEdit)
+
+        {
+            try
+
+            {
+
+                using (var db = new inventario2021Entities())
+
+                {
+                    var productoCompra = db.producto_compra.Find(productoCompraEdit.id);
+                    productoCompra.id_compra = productoCompraEdit.id_compra;
+                    productoCompra.id_producto = productoCompraEdit.id_producto;
+                    productoCompra.cantidad = productoCompraEdit.cantidad;
+                    
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+
+                }
+
+            }
+            catch (Exception ex)
+
+            {
+                ModelState.AddModelError("", "error" + ex);
+                return View();
+            }
+
+        }
 
     }
 }

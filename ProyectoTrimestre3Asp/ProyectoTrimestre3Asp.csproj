@@ -311,11 +311,13 @@
     <Content Include="Views\Compra\Delete.cshtml" />
     <Content Include="Views\Compra\Edit.cshtml" />
     <Content Include="Views\Producto_Compra\Index.cshtml" />
-    <Content Include="Views\Producto_Compra\ListarCompra.cshtml" />
-    <Content Include="Views\Compra\ListarProductos.cshtml" />
     <Content Include="Views\Producto_Compra\Create.cshtml" />
     <Content Include="Views\Producto_Compra\Details.cshtml" />
     <Content Include="Views\Producto_Compra\Delete.cshtml" />
+    <Content Include="Views\Usuario\Login.cshtml" />
+    <Content Include="Views\Producto_Compra\ListarCompras.cshtml" />
+    <Content Include="Views\Producto_Compra\ListarProductos.cshtml" />
+    <Content Include="Views\Producto_Compra\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
