@@ -182,6 +182,7 @@
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\Producto_CompraController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -318,6 +319,11 @@
     <Content Include="Views\Producto_Compra\ListarCompras.cshtml" />
     <Content Include="Views\Producto_Compra\ListarProductos.cshtml" />
     <Content Include="Views\Producto_Compra\Edit.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Views\Roles\Create.cshtml" />
+    <Content Include="Views\Roles\Details.cshtml" />
+    <Content Include="Views\Roles\Delete.cshtml" />
+    <Content Include="Views\Roles\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
