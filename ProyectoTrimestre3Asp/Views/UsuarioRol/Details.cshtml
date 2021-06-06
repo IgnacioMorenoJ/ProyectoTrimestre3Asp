@@ -1,0 +1,35 @@
+﻿@model ProyectoTrimestre3Asp.Models.usuariorol
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>usuariorol</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Usuario
+        </dt>
+
+        <dd>
+            @Html.Action("ListarUsuario")
+        </dd>
+
+        <dt>
+           Rol
+        </dt>
+
+        <dd>
+            @Html.Action("ListarRoles")
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Regresar a la  Lista", "Index")
+</p>
