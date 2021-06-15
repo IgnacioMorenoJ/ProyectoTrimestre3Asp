@@ -42,7 +42,7 @@ namespace ProyectoTrimestre3Asp.Controllers
         {
             using (var db = new inventario2021Entities())
             {
-                return db.compras.Find(idCompra).id_cliente;
+                return db.compras.Find(idCompra).id;
             }
         }
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoTrimestre3Asp.Models;
+using System.Web.Security;
 
 namespace ProyectoTrimestre3Asp.Controllers
 {
@@ -143,8 +144,50 @@ namespace ProyectoTrimestre3Asp.Controllers
                 ModelState.AddModelError("", "error " + ex);
                 return View();
             }
+                         
+        }
+        public ActionResult Login(string message = "")
+
+        { 
+                 
+            ViewBag.Message = message;
+            return View();
+               
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public ActionResult Login(string email, string password) 
+              
+        {
+            string passEncrip = UsuarioController.HashSHA1(password);
+
+            using (var db = new inventario2021Entities())
+            
+            {
+                var userLogin = db.usuarios.FirstOrDefault(e => e.email == email && e.password == passEncrip);
+                if (userLogin != null)
+                { 
+                FormsAuthentication.SetAuthCookie(userLogin.email, true);
+                Session["User"] = userLogin;
+                return RedirectToAction("Index");
+                }
+                else 
+                {
+                    return Login("Verifique sus datos");
+                }
 
 
+            }
+
+        }
+
+        [Authorize]
+        public ActionResult CloseSession()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
 
     }
