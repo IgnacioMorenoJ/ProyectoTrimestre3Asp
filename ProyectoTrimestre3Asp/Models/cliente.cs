@@ -11,7 +11,8 @@ namespace ProyectoTrimestre3Asp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class cliente
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,8 +22,18 @@ namespace ProyectoTrimestre3Asp.Models
         }
     
         public int id { get; set; }
+
+        [Required(ErrorMessage = "Diligencie el campo Nombre")]
+        [StringLength(25, ErrorMessage = "El limite de caracteres es de 25")]
         public string nombre { get; set; }
+
+        [Required(ErrorMessage = "Diligencie el campo Documento")]
+        [StringLength(15, ErrorMessage = "El limite de caracteres es de 15")]
         public string documento { get; set; }
+
+        [Required(ErrorMessage = "Diligencie el campo Email")]
+        [StringLength(50, ErrorMessage = "El limite de caracteres es de 50")]
+        [EmailAddress]
         public string email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

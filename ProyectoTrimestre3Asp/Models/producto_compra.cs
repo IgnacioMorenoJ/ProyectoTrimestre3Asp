@@ -11,13 +11,22 @@ namespace ProyectoTrimestre3Asp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class producto_compra
     {
         public int id { get; set; }
+
+        [Required(ErrorMessage = "Diligencie el campo Id Compra")]
         public int id_compra { get; set; }
+
+        [Required(ErrorMessage = "Diligencie el campo Id Producto")]
         public int id_producto { get; set; }
+
+        [Required(ErrorMessage = "Diligencie el campo Cantidad")]
         public int cantidad { get; set; }
+
+
     
         public virtual compra compra { get; set; }
         public virtual producto producto { get; set; }

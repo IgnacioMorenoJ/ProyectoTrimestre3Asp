@@ -78,7 +78,8 @@ namespace ProyectoTrimestre3Asp.Controllers
         }
 
         public ActionResult Edit(int id)
-        {
+        {;
+
             try
             {
                 using (var db = new inventario2021Entities())
@@ -123,6 +124,8 @@ namespace ProyectoTrimestre3Asp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(usuario usuarioEdit)
         {
+            if (!ModelState.IsValid)
+                return View();
             try
             {
                 using (var db = new inventario2021Entities())

@@ -11,7 +11,8 @@ namespace ProyectoTrimestre3Asp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class producto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,11 +23,28 @@ namespace ProyectoTrimestre3Asp.Models
         }
     
         public int id { get; set; }
+
+        [Required(ErrorMessage = "Diligencie el campo Nombre")]
+        [StringLength(25, ErrorMessage = "El limite de caracteres es de 25")]
         public string nombre { get; set; }
+
+
+        [Required(ErrorMessage = "Diligencie el campo Nombre")]
         public int percio_unitario { get; set; }
+
+
+        [Required(ErrorMessage = "Diligencie el campo Descripcion")]
         public string descripcion { get; set; }
+
+
+        [Required(ErrorMessage = "Diligencie el campo Cantidad")]
         public int cantidad { get; set; }
+
+
+        [Required(ErrorMessage = "Diligencie el campo Proveedor")]
         public int id_proveedor { get; set; }
+
+
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<producto_compra> producto_compra { get; set; }

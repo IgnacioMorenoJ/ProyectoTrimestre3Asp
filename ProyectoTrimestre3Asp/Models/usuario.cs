@@ -11,6 +11,7 @@ namespace ProyectoTrimestre3Asp.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class usuario
     {
@@ -22,11 +23,30 @@ namespace ProyectoTrimestre3Asp.Models
         }
     
         public int id { get; set; }
+
+        [Required(ErrorMessage ="Diligencie el campo Nombre")]
+        [StringLength (25, ErrorMessage ="El limite de caracteres es de 25")]
         public string nombre { get; set; }
+
+
+        [Required(ErrorMessage = "Diligencie el campo Apellido")]
+        [StringLength(25, ErrorMessage = "El limite de caracteres es de 25")]
         public string apellido { get; set; }
+
+
+        [Required(ErrorMessage = "Diligencie el campo Fecha de Nacimiento")]
         public System.DateTime fecha_nacimiento { get; set; }
+
+
+        [Required(ErrorMessage = "Diligencie el campo Email")]
+        [EmailAddress]
         public string email { get; set; }
+
+
+        [Required(ErrorMessage = "Diligencie el campo Password")]
+        [StringLength(25, ErrorMessage = "El limite de caracteres es de 35")]
         public string password { get; set; }
+
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<compra> compras { get; set; }

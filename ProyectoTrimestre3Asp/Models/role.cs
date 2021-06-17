@@ -11,7 +11,8 @@ namespace ProyectoTrimestre3Asp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class role
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,7 +22,12 @@ namespace ProyectoTrimestre3Asp.Models
         }
     
         public int id { get; set; }
+
+
+        [Required(ErrorMessage = "Diligencie el campo Descripcion")]
         public string descripcion { get; set; }
+
+
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<usuariorol> usuariorols { get; set; }
