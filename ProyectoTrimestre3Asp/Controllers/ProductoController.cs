@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoTrimestre3Asp.Models;
+using Rotativa;
 
 namespace ProyectoTrimestre3Asp.Controllers
 {
@@ -170,6 +171,11 @@ namespace ProyectoTrimestre3Asp.Controllers
             }
 
 
+        }
+
+        public ActionResult ImprimirReporte()
+        {
+            return new ActionAsPdf("Reporte") { FileName = "reporte.pdf" };
         }
 
 
