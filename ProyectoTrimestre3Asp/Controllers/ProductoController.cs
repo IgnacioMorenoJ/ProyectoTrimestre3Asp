@@ -144,6 +144,34 @@ namespace ProyectoTrimestre3Asp.Controllers
 
         }
 
+        public ActionResult Reporte()
+        {
+            try
+            {
+                var db = new inventario2021Entities();
+                var query = from tablaProveedor in db.proveedors
+                            join tablaProducto in db.productoes on tablaProveedor.id equals tablaProducto.id_proveedor
+                            select new Reporte
+                            {
+
+                                NombreProveedor = tablaProveedor.nombre,
+                                DireccionProveedor = tablaProveedor.direccion,
+                                TelefonoProveedor = tablaProveedor.telefono,
+                                NombreProducto = tablaProducto.nombre,
+                                PrecioProducto = tablaProducto.percio_unitario
+                            };
+
+                return View(query);
+
+            }catch(Exception ex)
+            {
+                ModelState.AddModelError(" ", "Error " + ex);
+                return View();
+            }
+
+
+        }
+
 
     }
 
