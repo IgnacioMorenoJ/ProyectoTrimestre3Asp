@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -120,6 +121,76 @@ namespace ProyectoTrimestre3Asp.Controllers
                 cliente user = db.clientes.Find(id);
                 return View(user);
             }
+        }
+
+        public ActionResult uploadCLienteCSV()
+
+        {
+            return View();
+
+        }
+
+        [HttpPost]
+        public ActionResult uploadClienteCSV(HttpPostedFileBase fileForm)
+
+        {
+            
+            string filePath = string.Empty;
+
+            
+            if (fileForm != null)
+
+            {
+              
+                string path = Server.MapPath("~/Uploads/");
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+
+                }
+
+                //Obtener el nombre del archivo
+
+                filePath = path + Path.GetFileName(fileForm.FileName);
+
+                //Obterner la extension del archivo
+
+                string extension = Path.GetExtension(fileForm.FileName);
+
+                //Guardar el Archivo
+
+                fileForm.SaveAs(filePath);
+
+                string csvData = System.IO.File.ReadAllText(filePath);
+
+                foreach (string row in csvData.Split('\n'))
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        var newCliente = new cliente
+                        {
+                            nombre = row.Split(';')[0],
+                            documento = row.Split(';')[1],
+                            email = row.Split(';')[2],
+                                                    };
+
+                        using (var db = new inventario2021Entities())
+
+                        {
+                            db.clientes.Add(newCliente);
+                            db.SaveChanges();
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+            return View();
+
         }
 
     }
