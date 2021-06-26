@@ -1,12 +1,13 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/Custom.css">   
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -17,25 +18,58 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Nombre de la aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Sistema de Inventarios", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li> @Html.ActionLink("Inicio", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
 
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CRUD Usuario <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Registrar</a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li>@Html.ActionLink("Sobre mi", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Iniciar Sesion", "Login", "Usuario")</li>
-                    <li>@Html.ActionLink("CRUD Usuario", "Index", "Usuario")</li>
-                    <li>@Html.ActionLink("CRUD Cliente", "Index", "Cliente")</li>
-                    <li>@Html.ActionLink("CRUD Proveedor", "Index", "Proveedor")</li>
-                    <li>@Html.ActionLink("CRUD Producto", "Index", "Producto")</li>
-                    <li>@Html.ActionLink("CRUD Compra", "Index", "Compra")</li>
-                    <li>@Html.ActionLink("CRUD Producto Compra", "Index", "Producto_Compra")</li>
-
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Salir", "CloseSession", "Usuario")</li>
-                    }
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" data-toggle="dropdown" data-target="despegable" href="#">
 
+                                Listado Crud Tablas
+
+                            </a>
+                            <div class="dropdown-menu">
+
+                                <a class="dropdown-item" href="#">@Html.ActionLink("CRUD Usuario", "Index", "Usuario")               </a>
+                                <br />
+                                <a class="dropdown-item" href="#">@Html.ActionLink("CRUD Cliente", "Index", "Cliente")               </a>
+                                <br />
+                                <a class="dropdown-item" href="#">@Html.ActionLink("CRUD Compra", "Index", "Compra")                </a>
+                                <br />
+                                <a class="dropdown-item" href="#">@Html.ActionLink("CRUD Proveedor", "Index", "Proveedor")           </a>
+                                <br />
+                                <a class="dropdown-item" href="#">@Html.ActionLink("CRUD Producto", "Index", "Producto")             </a>
+                                <br />
+                                <a class="dropdown-item" href="#">@Html.ActionLink("CRUD Roles", "Index", "Roles")                   </a>
+                                <br />
+                                <a class="dropdown-item" href="#">@Html.ActionLink("CRUD Producto Compra", "Index", "Producto_Compra")</a>
+                                <br />
+                                <a class="dropdown-item" href="#">@Html.ActionLink("CRUD Producto Imagen", "Index", "Producto_Imagen")</a>
+                              
+                        <br />
+                        <a class="dropdown-item" href="#">@Html.ActionLink("Cerrar Sesion", "CloseSession", "Usuario")               </a>
+
+</div>
+                        </li>
+                        
+                    }
                 </ul>
             </div>
         </div>
